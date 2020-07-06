@@ -2018,7 +2018,7 @@ string_decoder@~1.1.1:
     safe-buffer "~5.1.0"
 
 stringstream@~0.0.4:
-  version "0.0.5"
+  version "0.0.6"
   resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"
 
 strip-ansi@^3.0.0, strip-ansi@^3.0.1:
@@ -2132,7 +2132,7 @@ uglify-js@~3.3.0:
     source-map "~0.6.1"
 
 underscore.string@~3.2.3:
-  version "3.2.3"
+  version "3.3.5"
   resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-3.2.3.tgz#806992633665d5e5fcb4db1fb3a862eb68e9e6da"
 
 unpipe@1.0.0, unpipe@~1.0.0:
