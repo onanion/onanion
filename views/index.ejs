@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html ng-app="top.nemanja.party">
+	<head>
+		<title>Party</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<!-- Stylesheets -->
+		<link rel="stylesheet" href="./assets/stylesheets/stylesheet.css">
+	</head>
+	<body ng-controller="Player">
+		<sound-manager></sound-manager>
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Party</a>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<ul class="list-group">
+						<li class="list-group-item active">
+							<h3>Playlist: </h3>
+							<span class="pull-right">
+								<button ng-click="share(); $event.stopPropagation();" class="btn btn-default btn-success">
+									<span class="glyphicon glyphicon-download-alt"></span>
+								</button>
+							</span>
+						</li>
+						<li class="list-group-item">
+							<input ng-model="filter" type="text" class="form-control" placeholder="Search for...">
+						</li>
+						<a ng-class="{active: currentPlaying.id == result.id}" ng-repeat="(id, result) in playlist | filter: filter" ng-click="download(result.id)" class="list-group-item clearfix" play-from-playlist="result">
+							<img class="pull-left img-thumbnail" ng-src="{(result.thumbnail)}">
+							<strong style="position: relative; left:10px;" ng-bind="result.title"></strong>
+							<span class="pull-right">
+								<button ng-click="deleteSong(result, id); $event.stopPropagation();" ng-show="currentPlaying.id != result.id" class="btn btn-default btn-danger">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+								<button ng-click="downloadSong(result.id); $event.stopPropagation();" class="btn btn-default btn-success">
+									<span class="glyphicon glyphicon-download-alt"></span>
+								</button>
+							</span>
+						</a>
+					</ul>
+				</div>
+				<div class="col-md-6">
+					<ul class="list-group">
+						<li class="list-group-item active">
+							<h3>Search: </h3>
+						</li>
+						<li class="list-group-item">
+							<div class="input-group search">
+								<input ng-model="query" type="text" class="form-control" my-enter="search()" placeholder="Search for...">
+								<span class="input-group-btn">
+									<button class="btn btn-default" ng-click="search()" type="button">Go!</button>
+								</span>
+							</div>
+						</li>
+						<a ng-repeat="result in results" class="list-group-item clearfix" music-player add-song="result">
+							<img class="pull-left img-thumbnail" ng-src="{(result.thumbnail)}">
+							<strong style="position: relative; left:10px;" ng-bind="result.title"></strong>
+							<span class="pull-right">
+								<button ng-click="downloadSong(result.id); $event.stopPropagation();" class="btn btn-default btn-success">
+									<span class="glyphicon glyphicon-download-alt"></span>
+								</button>
+							</span>
+						</a>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<nav class="navbar navbar-inverse navbar-fixed-bottom">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+
+				<div class="navbar-collapse collapse" id="collapse">
+					<div class="btn-group">
+						<button class="btn btn-default navbar-btn" prev-track>
+							<span class="icon icon-left-dir"></span>
+						</button>
+
+						<button class="btn btn-default navbar-btn" ng-show="!isPlaying" play-music>
+							<span class="icon icon-play"></span>
+						</button>
+
+						<button class="btn btn-default navbar-btn" ng-show="isPlaying" pause-music>
+							<span class="icon icon-pause"></span>
+						</button>
+
+						<button class="btn btn-default navbar-btn" next-track>
+							<span class="icon icon-right-dir"></span>
+						</button>
+
+						<button type="button" class="btn btn-default navbar-btn" uib-popover-template="volumetemplate">
+							<span class="icon icon-volume"></span>
+						</button>
+					</div>
+					<ul class="nav navbar-nav">
+						<li><a style="text-align: center">{(current.mins)}:{(current.secs)} / {(total.mins)}:{(total.secs)}</a></li>
+					</ul>
+
+					<div class="move-right">
+						<span slider class="sliders" ng-model="song.position" max="song.duration" ng-change="move()"></span>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<script type="text/ng-template" id="volumetemplate.html">
+			<div>
+				<span orientation="vertical" slider ng-model="volume.value" reversed="true" max="100" ng-change="setVolume()"></span>
+			</div>
+		</script>
+
+		<script type="text/ng-template" id="share.html">
+			<div class="modal-header">
+				<h3 class="modal-title">Share playlist</h3>
+			</div>
+			<div class="modal-body">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></button>
+					</div>
+					<input type="text" class="form-control" ng-model="url">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+			</div>
+		</script>
+
+		<script src="./assets/javascript/javascript.js" charset="utf-8"></script>
+	</body>
+
+</html>
