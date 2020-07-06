@@ -1,0 +1,32 @@
+{
+  "name": "party-youtube-downloader",
+  "version": "2.4.5",
+  "description": "Music downloader for party",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nemanjan00/party-youtube-downloader.git"
+  },
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "party": "index.js"
+  },
+  "author": "nemanjan00 <nemanjan00@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*"
+  },
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "forever": "^0.15.1",
+    "ytdl-core": "^0.20.2"
+  }
+}
