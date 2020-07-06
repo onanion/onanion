@@ -2,13 +2,13 @@
   "name": "party-youtube-downloader",
   "version": "2.4.5",
   "description": "Music downloader for party",
-  "main": "/index.js",
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/nemanjan00/party-youtube-downloader.git"
   },
   "scripts": {
-    "start": "node /index.js",
+    "start": "node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
